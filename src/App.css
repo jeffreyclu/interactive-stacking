@@ -2,29 +2,3 @@
   text-align: center;
   /* display: flex; */
 }
-
-.Building {
-  display: flex;
-  flex-flow: column nowrap;
-}
-
-.Floor {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-}
-
-.Blocks {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.Block {
-  display: flex;
-  flex-flow: column nowrap;
-  color: white;
-}

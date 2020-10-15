@@ -96,6 +96,7 @@ const BlockContainer = styled.div`
     : "5rem"
   )};
   min-height: 3rem;
+  position: relative;
 `;
 
 const LevelLabel = styled.div`
@@ -131,12 +132,28 @@ const BlockArea = styled.span`
   padding: 0.5rem;
 `;
 
+const AddBlockContainer = styled.div`
+    display: flex;
+`;
+
+const AddBlockButton = styled.button`
+  padding: 0.5rem;
+`;
+
+const DeleteBlockContainer = styled.div`
+  position: absolute;
+  top: 0.1rem;
+  right: 0.3rem;
+  color: white;
+  font-weight: bold;
+`;
+
 /**
  * component representing a level (vertical)
  */
-const Level = ({ level, blocks }) => {
+const Level = ({ level, blocks, data, setData }) => {
   const { title, maxArea } = level;
-  const blockList = blocks.map((block, i) => <Block key={block.id} block={block} index={i} maxArea={maxArea} />);
+  const blockList = blocks.map((block, i) => <Block key={block.id} block={block} index={i} maxArea={maxArea} level={level} data={data} setData={setData} />);
   const blockAreas = blocks.reduce((prev, curr) => (prev + curr.area), 0);
   return(
       <LevelContainer>
@@ -166,7 +183,9 @@ const Level = ({ level, blocks }) => {
               {provided.placeholder}
             </RowContainer>)}
         </Droppable>
-        
+        <AddBlock level={level} data={data} setData={setData} blocks={blocks}>
+          Add a Block
+        </AddBlock>
       </LevelContainer>
   )
 }
@@ -174,7 +193,7 @@ const Level = ({ level, blocks }) => {
 /**
  * component representing a block (horizontal)
  */
-const Block = ({ block, index }) => {
+const Block = ({ block, index, level, data, setData }) => {
   const { blockName, id, area, color } = block;
   return (
     <Draggable
@@ -196,11 +215,118 @@ const Block = ({ block, index }) => {
           <BlockArea>
             Area: {area}
           </BlockArea>
+          <DeleteBlock 
+            block={block}
+            level={level}
+            data={data}
+            setData={setData}
+          />
         </BlockContainer>)}
     </Draggable>
   );
 }
 
+/**
+ * Component to add a block
+ */
+const AddBlock = ({ level, data, setData }) => {
+  const [blockName, setBlockName] = useState('');
+  const [blockArea, setBlockArea] = useState(0);
+  const [blockColor, setBlockColor] = useState('ffffff');
+  const addBlock = () => {
+    // validate the input
+    if (!blockName.length || blockArea === 0) return;
+
+    // get id from the last block
+    const dataBlocks = Object.keys(data.blocks);
+    const lastBlock = dataBlocks[dataBlocks.length - 1];
+    const lastBlockIdArr = lastBlock ? lastBlock.split("-") : undefined;
+    const lastBlockId = lastBlockIdArr ? lastBlockIdArr[lastBlockIdArr.length - 1] : 0;
+
+    // create a new block
+    const newBlockId = `block-${Number(lastBlockId) + 1}`;
+    const newBlock = {
+      id: newBlockId,
+      blockName: blockName,
+      area: blockArea,
+      color: blockColor,
+    };
+
+    // duplicate the blocks store and add the new block
+    const newBlocks = { ...data.blocks };
+    newBlocks[newBlockId] = newBlock;
+
+    // duplicate the blockIds array of the current level and push the new block id onto it
+    const currentLevelId = level.id;
+    const newBlockIds = Array.from(data.levels[currentLevelId].blockIds);
+    newBlockIds.push(newBlockId);
+
+    //duplicate the state and add the new info to it
+    const newData = { 
+      ...data,
+      blocks: newBlocks,
+      levels: {
+        ...data.levels,
+        [currentLevelId]: {
+          ...data.levels[currentLevelId],
+          blockIds: newBlockIds,
+        }
+      }
+    };
+    setData(newData);
+    return;
+  };
+
+  return (
+    <>
+    <AddBlockContainer>
+      <div>
+        <input onChange={(e) => setBlockName(e.target.value)} type="text" />
+        <input onChange={(e) => setBlockArea(Number(e.target.value))} type="number" />
+        <input onChange={(e) => setBlockColor(e.target.value)} type="color" value="#ffffff"/>
+      </div>
+      <AddBlockButton onClick={addBlock}>
+        Add a Block
+      </AddBlockButton>
+    </AddBlockContainer>
+    </>
+  )
+}
+
+/**
+ * Component to delete a block
+ */
+const DeleteBlock = ({ block, level, data, setData }) => {
+  const deleteBlock = () => {
+    // duplicate the data state
+    const newData = { ...data };
+
+    // remove the current block from the block
+    delete newData.blocks[block.id];
+    
+    // duplicate the current level
+    const currentLevelId = level.id;
+    const currentLevel = { ...data.levels[currentLevelId]};
+
+    // get the index of the the current block in the blockIds array and delete it
+    const index = currentLevel.blockIds.indexOf(block.id);
+    currentLevel.blockIds.splice(index, 1);
+
+    // update the new state with the info
+    newData.levels[currentLevelId] = currentLevel;
+    setData(newData);
+    return;
+  };
+  return(
+    <DeleteBlockContainer onClick={deleteBlock}>
+      x
+    </DeleteBlockContainer>
+  )
+}
+
+/**
+ * App component
+ */
 function App() {
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
@@ -218,6 +344,7 @@ function App() {
     const start = data.levels[source.droppableId];
     const finish = data.levels[destination.droppableId];
 
+    // if we're in the same level
     if (start === finish) {
       const newBlockIds = Array.from(start.blockIds);
       newBlockIds.splice(source.index, 1);
@@ -267,11 +394,12 @@ function App() {
     }
 
     setData(newData);
+    return;
   }
 
   const [data, setData] = useState();
   const [levels, setlevels] = useState([]);
-
+  
   // hook to fetch data
   useEffect(() => {
     setTimeout(() => console.log('fetching data'), 1000);
@@ -282,15 +410,16 @@ function App() {
 
   // hook to map data into components
   useEffect(() => {
+    console.log('mapping components')
     if (!data) return;
     const initiallevels = data.levelOrder.map((levelId, i) => {
       const level = data.levels[levelId];
       const blocks = level.blockIds.map((blockId) => data.blocks[blockId]);
   
-      return <Level key={level.id} level={level} blocks={blocks} />;
+      return <Level key={level.id} level={level} blocks={blocks} data={data} setData={setData} />;
     })
     setlevels(initiallevels);
-  }, [data]);
+  }, [data, setData]);
 
   return (
     <div className="App">
