@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Droppable } from 'react-beautiful-dnd';
 
 import Block from './Block';
+import AddBlock from './AddBlock';
 
 const LevelContainer = styled.div`
   border-top: 1px solid lightgrey;
@@ -18,7 +19,7 @@ const LevelContainer = styled.div`
 const LevelLabel = styled.div`
   display: flex;
   flex-flow: column;
-  min-width: 4rem;
+  min-width: 5rem;
 `;
 
 const LevelTitle = styled.h3`
@@ -82,9 +83,9 @@ const Level = ({ level, blocks, data, setData }) => {
             {provided.placeholder}
           </RowContainer>)}
       </Droppable>
-      {/* <AddBlock level={level} data={data} setData={setData} blocks={blocks}>
+      <AddBlock level={level} data={data} setData={setData} blocks={blocks}>
         Add a Block
-      </AddBlock> */}
+      </AddBlock>
     </LevelContainer>
   )
 }
