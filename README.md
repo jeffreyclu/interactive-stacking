@@ -1,4 +1,27 @@
+# Interactive Stacking Diagram
+
+## Contents
+
+- Introduction
+- Architecture
+- Prerequisites
+- Installation Instructions
+- Available Scripts
+
+## Introduction
+
+The interactive stacking diagram provides a easy-to-use drag and drop mechanism to reorder blocks in a building diagram. Individual blocks have a Name, Color, and Area attributes. Blocks are grouped in Levels which have a Name, MaxArea and CurrentArea attributes. Levels are grouped in a Building.
+
+## Architecture
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+| Area of Focus           | Technology          |
+| ----------------------- | ------------------- |
+| Frontend UI             | React               |
+| Component Styling       |                     |
+| Drag and Drop Mechanism | react-beautiful-dnd |
+| Database                | Google Sheets       |
 
 ## Available Scripts
 

@@ -1,12 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './components/app/App';
+import styled from 'styled-components';
 import * as serviceWorker from './serviceWorker';
+
+import '@atlaskit/css-reset';
+
+import App from './components/App';
+
+const AppContainer = styled.div`
+  background-color: #ffffff;
+`;
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AppContainer>
+      <App />
+    </AppContainer>
   </React.StrictMode>,
   document.getElementById('root')
 );

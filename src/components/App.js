@@ -3,35 +3,11 @@ import styled from 'styled-components';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { exportComponentAsPDF } from 'react-component-export-image';
 
-import '@atlaskit/css-reset';
-import './App.css';
-import Building from './../Building';
-
-// const initialData = {
-//   blocks: {
-//     'block-1': { id: 'block-1', blockName: 'block 1', area: 9000, color: 'red'},
-//     'block-2': { id: 'block-2', blockName: 'block 2', area: 10000, color: 'blue'},
-//     'block-3': { id: 'block-3', blockName: 'block 3', area: 7500, color: 'purple'},
-//   },
-//   levels: {
-//     'level-1': {
-//       id: 'level-1',
-//       levelName: 'Level 1',
-//       blockIds: ['block-1'],
-//       maxArea: 23500,
-//     },
-//     'level-2': {
-//       id: 'level-2',
-//       levelName: 'Level 2',
-//       blockIds: ['block-2', 'block-3'],
-//       maxArea: 23500,
-//     },
-//   },
-//   levelOrder: ['level-2', 'level-1'],
-// }
+import Building from './Building';
 
 const BuildingContainer = styled.div`
   margin-top: 4rem;
+  background-color: #ffffff;
 `;
 
 const PrintButton = styled.button`
