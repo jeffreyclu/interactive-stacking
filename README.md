@@ -2,15 +2,17 @@
 
 ## Contents
 
-- Introduction
-- Architecture
-- Prerequisites
-- Installation Instructions
-- Available Scripts
+- [Introduction](#Introduction)
+- [Architecture](#Architecture)
+- [Prerequisites](#Prerequisites)
+- [Installation Instructions](#Installation-Instructions)
+- [Available Scripts](#Available-Scripts)
 
 ## Introduction
 
 The interactive stacking diagram provides a easy-to-use drag and drop mechanism to reorder blocks in a building diagram. Individual blocks have a Name, Color, and Area attributes. Blocks are grouped in Levels which have a Name, MaxArea and CurrentArea attributes. Levels are grouped in a Building.
+
+![Screen Shot 2020-10-28 at 2.43.17 PM](README.assets/Screen Shot 2020-10-28 at 2.43.17 PM.png)
 
 ## Architecture
 
@@ -19,11 +21,70 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 | Area of Focus           | Technology          |
 | ----------------------- | ------------------- |
 | Frontend UI             | React               |
-| Component Styling       |                     |
+| Component Styling       | styled-components   |
 | Drag and Drop Mechanism | react-beautiful-dnd |
 | Database                | Google Sheets       |
+| Server                  | express             |
 
-## Available Scripts
+## Prerequisites
+
+In order to run this application, the following are required:
+
+- [Node.js](https://nodejs.org/en/) 14.15+
+- An IDE (Integrated Development Environment) - [VS Code](https://code.visualstudio.com/) is recommended
+- [Git](https://git-scm.com/)
+- A [Github](https://github.com/) account
+- A [Google](https://google.com) Account
+- A [Google API developer](https://developers.google.com/) key
+
+## Installation Instructions
+
+1. Download and install [Git](https://git-scm.com/downloads)
+
+2. Download and install [VS Code](https://code.visualstudio.com/download)
+
+3. Download and install [Node.js](https://nodejs.org/en/download/)
+
+4. Create a [Github](https://github.com/) account, login, and fork this repo
+
+5. Open VS Code and navigate to a local working folder (e.g. My Documents)
+
+6. Open a terminal window in VS Code and navigate to the same working folder by using the `cd` [command](https://www.howtogeek.com/659411/how-to-change-directories-in-command-prompt-on-windows-10/).
+
+7. In the terminal window, run the command `git clone [your-repo-url]` to clone your forked repo locally on your computer
+
+8. In the terminal window, run the command `cd interactive-stacking` to change the working directory
+
+9. Open a browser, login to Google and create a [Google Sheet](https://www.google.com/sheets/about/) with the following structure:
+     - One sheet called Levels with the following structure:
+   ![Screen Shot 2020-10-28 at 2.30.48 PM](README.assets/Screen Shot 2020-10-28 at 2.30.48 PM.png)
+     - A second sheet called Blocks with the following structure:
+   ![Screen Shot 2020-10-28 at 2.31.00 PM](README.assets/Screen Shot 2020-10-28 at 2.31.00 PM.png)
+
+10. Once the sheet is set up, click FIle -> Publish to the Web. Ensure that Entire Document and Web Page are selected and click Publish.
+
+11. Open a new tab and login to the [Google Developer Console](https://console.developers.google.com/apis/dashboard).
+
+12. In the console, create a New Project and name it `interactive-stacking`.
+
+13. Once the project is created, click Credentials on the side bar. Near the top of the screen click Create Credentials and select API Key. Copy the API Key and Click Close for now.
+
+14. In VS Code, create a new file called `.env` in the `interactive-stacking`folder. This environment file will hold the links to your Google Sheet as well as your Google Developer API Key. For security purposes, the links or API Key will never be published to github.
+
+15. The `.env` file should have the following structure. Copy and paste the following:
+
+    ​	`REACT_APP_LEVELS_LINK=https://sheets.googleapis.com/v4/spreadsheets/[your-google-sheet-id]/values/Levels?key=[your-google-developer-API-key]
+    REACT_APP_BLOCKS_LINK=https://sheets.googleapis.com/v4/spreadsheets/[your-google-sheet-id]/values/Blocks?key=[your-google-developer-API-key]`
+
+16. Replace `[your-google-sheet-id]` with the Sheet ID from your Google Sheet URL (see screenshot below) and replace `[your-google-developer-API-key]` with the API key generated in step 12. Save and close the `.env` file.
+
+![Screen Shot 2020-10-28 at 3.23.11 PM](README.assets/Screen Shot 2020-10-28 at 3.23.11 PM.png)
+
+1. In the terminal window, run the command `npm install` to install all required packages.
+2. In the terminal window, run the command `npm run serve` to build and serve the application.
+3. Visit http://localhost:3000 to view the app.
+
+##  Available Scripts
 
 In the project directory, you can run:
 
@@ -49,6 +110,10 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run serve`
+
+Builds and serves the static files in the [build](#npm-run-build) folder using a simple express.js server. The app will be available at http://localhost.
 
 ### `npm run eject`
 
