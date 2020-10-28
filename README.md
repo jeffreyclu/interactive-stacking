@@ -20,11 +20,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 | Area of Focus           | Technology          |
 | ----------------------- | ------------------- |
-| Frontend UI             | React               |
-| Component Styling       | styled-components   |
-| Drag and Drop Mechanism | react-beautiful-dnd |
-| Database                | Google Sheets       |
-| Server                  | express             |
+| Frontend UI             | [React](https://reactjs.org/)               |
+| Component Styling       | [styled-components](https://styled-components.com/)   |
+| Drag and Drop Mechanism | [react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd) |
+| Database                | [Google Sheets API](https://developers.google.com/sheets/api)      |
+| Server                  | [Express](https://expressjs.com/)             |
 
 ## Prerequisites
 
@@ -55,7 +55,7 @@ In order to run this application, the following are required:
 
 8. In the terminal window, run the command `cd interactive-stacking` to change the working directory
 
-9. Open a browser, login to Google and create a [Google Sheet](https://www.google.com/sheets/about/) with the following structure:
+9. Open a browser, login to Google and create a [Google Sheet](https://www.google.com/sheets/about/) with the following structure (you can copy [this sheet](https://docs.google.com/spreadsheets/d/e/2PACX-1vSzC0IpB45knvuUiViF7I1XjwIM8dF98U2M89qDSc1l9IdEAj_de9FFLjRgVPOTn7nqmXvELyaQssPN/pubhtml) as a starting point):
      - One sheet called Levels with the following structure:
 
    ![Levels Screenshot](https://raw.githubusercontent.com/jeffreyclu/interactive-stacking/master/README.assets/Screen%20Shot%202020-10-28%20at%202.30.48%20PM.png)
@@ -71,7 +71,7 @@ In order to run this application, the following are required:
 
 13. Once the project is created, click Credentials on the side bar. Near the top of the screen click Create Credentials and select API Key. Copy the API Key and Click Close for now.
 
-14. In VS Code, create a new file called `.env` in the `interactive-stacking`folder. This environment file will hold the links to your Google Sheet as well as your Google Developer API Key. For security purposes, the links or API Key will never be published to github.
+14. In VS Code, create a new file called `.env` in the `interactive-stacking`folder. This environment file will hold the links to your Google Sheet as well as your Google Developer API Key. For security purposes, the spreadhseet links or API Key will never be published to github as long as the `.env` file is included in the `.gitignore` folder.
 
 15. Copy and paste the following into the `.env` file:
 
