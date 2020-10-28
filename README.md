@@ -12,7 +12,7 @@
 
 The interactive stacking diagram provides a easy-to-use drag and drop mechanism to reorder blocks in a building diagram. Individual blocks have a Name, Color, and Area attributes. Blocks are grouped in Levels which have a Name, MaxArea and CurrentArea attributes. Levels are grouped in a Building.
 
-![Screen Shot 2020-10-28 at 2.43.17 PM](README.assets/Screen Shot 2020-10-28 at 2.43.17 PM.png)
+![App Screenshot](https://raw.githubusercontent.com/jeffreyclu/interactive-stacking/master/README.assets/Screen%20Shot%202020-10-28%20at%202.43.17%20PM.png)
 
 ## Architecture
 
@@ -57,9 +57,11 @@ In order to run this application, the following are required:
 
 9. Open a browser, login to Google and create a [Google Sheet](https://www.google.com/sheets/about/) with the following structure:
      - One sheet called Levels with the following structure:
-   ![Screen Shot 2020-10-28 at 2.30.48 PM](README.assets/Screen Shot 2020-10-28 at 2.30.48 PM.png)
+
+   ![Levels Screenshot](https://raw.githubusercontent.com/jeffreyclu/interactive-stacking/master/README.assets/Screen%20Shot%202020-10-28%20at%202.30.48%20PM.png)
      - A second sheet called Blocks with the following structure:
-   ![Screen Shot 2020-10-28 at 2.31.00 PM](README.assets/Screen Shot 2020-10-28 at 2.31.00 PM.png)
+
+   ![Blocks Screenshot](https://raw.githubusercontent.com/jeffreyclu/interactive-stacking/master/README.assets/Screen%20Shot%202020-10-28%20at%202.31.00%20PM.png)
 
 10. Once the sheet is set up, click FIle -> Publish to the Web. Ensure that Entire Document and Web Page are selected and click Publish.
 
@@ -71,18 +73,23 @@ In order to run this application, the following are required:
 
 14. In VS Code, create a new file called `.env` in the `interactive-stacking`folder. This environment file will hold the links to your Google Sheet as well as your Google Developer API Key. For security purposes, the links or API Key will never be published to github.
 
-15. The `.env` file should have the following structure. Copy and paste the following:
+15. Copy and paste the following into the `.env` file:
 
-    ​	`REACT_APP_LEVELS_LINK=https://sheets.googleapis.com/v4/spreadsheets/[your-google-sheet-id]/values/Levels?key=[your-google-developer-API-key]
-    REACT_APP_BLOCKS_LINK=https://sheets.googleapis.com/v4/spreadsheets/[your-google-sheet-id]/values/Blocks?key=[your-google-developer-API-key]`
+      ```
+      REACT_APP_LEVELS_LINK=https://sheets.googleapis.com/v4/spreadsheets/[your-google-sheet-id]/values/Levels?key=[your-google-developer-API-key]
+      REACT_APP_BLOCKS_LINK=https://sheets.googleapis.com/v4/spreadsheets/[your-google-sheet-id]/values/Blocks?key=[your-google-developer-API-key]
+      ```
+
+      
 
 16. Replace `[your-google-sheet-id]` with the Sheet ID from your Google Sheet URL (see screenshot below) and replace `[your-google-developer-API-key]` with the API key generated in step 12. Save and close the `.env` file.
+![Sheet ID Screenshot](https://raw.githubusercontent.com/jeffreyclu/interactive-stacking/master/README.assets/Screen%20Shot%202020-10-28%20at%203.23.11%20PM.png)
 
-![Screen Shot 2020-10-28 at 3.23.11 PM](README.assets/Screen Shot 2020-10-28 at 3.23.11 PM.png)
-
-1. In the terminal window, run the command `npm install` to install all required packages.
-2. In the terminal window, run the command `npm run serve` to build and serve the application.
-3. Visit http://localhost:3000 to view the app.
+17. In the terminal window, run the command `npm install` to install all required packages.
+18. In the terminal window, run the command `npm start` to start the application in Development mode.
+19. Visit http://localhost:3000 to view the app.
+20. Make changes to `src/App.js` and watch the changes live in the browser.
+21. To build and serve the app, run the command `npm run server` to build and serve the application in Production mode.
 
 ##  Available Scripts
 
