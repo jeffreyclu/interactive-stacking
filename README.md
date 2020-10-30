@@ -93,7 +93,7 @@ In order to run this application, the following are required:
 20. In the terminal window, run the command `npm start` to start the application in Development mode.
 21. Visit http://localhost:3000 to view the app.
 22. Make changes to `src/App.js` and watch the changes live in the browser.
-23. To build and serve the app, run the command `npm run server` to build and serve the application in Production mode.
+23. To build and serve the app, run the command `npm run serve` to build and serve the application in Production mode.
 
 ##  Available Scripts
 
