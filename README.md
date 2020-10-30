@@ -63,17 +63,21 @@ In order to run this application, the following are required:
 
    ![Blocks Screenshot](https://raw.githubusercontent.com/jeffreyclu/interactive-stacking/master/README.assets/Screen%20Shot%202020-10-28%20at%202.31.00%20PM.png)
 
-10. Once the sheet is set up, click FIle -> Publish to the Web. Ensure that Entire Document and Web Page are selected and click Publish.
+10. Once the sheet is set up, click File -> Publish to the Web. Ensure that Entire Document and Web Page are selected and click Publish.
 
-11. Open a new tab and login to the [Google Developer Console](https://console.developers.google.com/apis/dashboard).
+11. Click File -> Share and then enable sharing for `Anyone with the link`.
 
-12. In the console, create a New Project and name it `interactive-stacking`.
+12. Open a new tab and login to the [Google Developer Console](https://console.developers.google.com/apis/dashboard).
 
-13. Once the project is created, click Credentials on the side bar. Near the top of the screen click Create Credentials and select API Key. Copy the API Key and Click Close for now.
+13. In the console, create a New Project and name it `interactive-stacking`.
 
-14. In VS Code, create a new file called `.env` in the `interactive-stacking`folder. This environment file will hold the links to your Google Sheet as well as your Google Developer API Key. For security purposes, the spreadhseet links or API Key will never be published to github as long as the `.env` file is included in the `.gitignore` folder.
+14. Once the project is created, click Credentials on the side bar. Near the top of the screen click Create Credentials and select API Key. Copy the API Key and Click Close for now.
 
-15. Copy and paste the following into the `.env` file:
+15. Near the top click `ENABLE APIS AND SERVICES`. Search for `Google Sheets API` and then enable the service. Once it's enabled, go back to the main dashboard.
+
+16. In VS Code, create a new file called `.env` in the `interactive-stacking`folder. This environment file will hold the links to your Google Sheet as well as your Google Developer API Key. For security purposes, the spreadhseet links or API Key will never be published to github as long as the `.env` file is included in the `.gitignore` folder.
+
+17. Copy and paste the following into the `.env` file:
 
       ```
       REACT_APP_LEVELS_LINK=https://sheets.googleapis.com/v4/spreadsheets/[your-google-sheet-id]/values/Levels?key=[your-google-developer-API-key]
@@ -82,14 +86,14 @@ In order to run this application, the following are required:
 
       
 
-16. Replace `[your-google-sheet-id]` with the Sheet ID from your Google Sheet URL (see screenshot below) and replace `[your-google-developer-API-key]` with the API key generated in step 12. Save and close the `.env` file.
+18. In the `.env` file, replace `[your-google-sheet-id]` with the Sheet ID from your Google Sheet URL (see screenshot below) and replace `[your-google-developer-API-key]` with the API key generated in step 12. Save and close the `.env` file.
 ![Sheet ID Screenshot](https://raw.githubusercontent.com/jeffreyclu/interactive-stacking/master/README.assets/Screen%20Shot%202020-10-28%20at%203.23.11%20PM.png)
 
-17. In the terminal window, run the command `npm install` to install all required packages.
-18. In the terminal window, run the command `npm start` to start the application in Development mode.
-19. Visit http://localhost:3000 to view the app.
-20. Make changes to `src/App.js` and watch the changes live in the browser.
-21. To build and serve the app, run the command `npm run server` to build and serve the application in Production mode.
+19. In the terminal window, run the command `npm install` to install all required packages.
+20. In the terminal window, run the command `npm start` to start the application in Development mode.
+21. Visit http://localhost:3000 to view the app.
+22. Make changes to `src/App.js` and watch the changes live in the browser.
+23. To build and serve the app, run the command `npm run server` to build and serve the application in Production mode.
 
 ##  Available Scripts
 
